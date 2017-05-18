@@ -6,7 +6,7 @@ let client = mqtt.connect("wss://mbltest01.mqtt.iot.gz.baidubce.com:8884/mqtt", 
 });
 
 client.on("connect", () => {
-    console.log("connected");
+    console.log("connected...");
 
     client.on("message", (topic: String, message: Buffer) => {
         console.log(topic + ": " + message.toString())
