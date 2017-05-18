@@ -47,13 +47,13 @@ client.on("connect", (connack) => {
                 console.log(topic + ": " + message.toString());
             });
 
-            let message: any = {
+            let data: any = {
                 who: "body",
                 whoAmI: "body",
                 when: new Date().yyyyMMddHHmmss()
             };
 
-            client.publish("eight/i.am", JSON.stringify(message), (err) => {
+            client.publish("eight/i.am", JSON.stringify(data), (err) => {
                 console.log("publish");
                 console.log(JSON.stringify(err));
             });

@@ -35,12 +35,12 @@ client.on("connect", function (connack) {
                 console.log(JSON.stringify(packet));
                 console.log(topic + ": " + message.toString());
             });
-            var message = {
+            var data = {
                 who: "body",
                 whoAmI: "body",
                 when: new Date().yyyyMMddHHmmss()
             };
-            client.publish("eight/i.am", JSON.stringify(message), function (err) {
+            client.publish("eight/i.am", JSON.stringify(data), function (err) {
                 console.log("publish");
                 console.log(JSON.stringify(err));
             });
