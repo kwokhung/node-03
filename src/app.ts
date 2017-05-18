@@ -7,6 +7,9 @@ let client = mqtt.connect("wss://mbltest01.mqtt.iot.gz.baidubce.com:8884/mqtt", 
 
 client.on("connect", (connack) => {
     console.log("on connect");
+    let a: Buffer = Buffer.from("a的a");
+    console.log(JSON.stringify(a));
+    console.log(a.toString());
     console.log(JSON.stringify(connack));
 
     client.subscribe("eight/#", (err, granted) => {
@@ -21,7 +24,7 @@ client.on("connect", (connack) => {
                 console.log(JSON.stringify(message));
                 console.log(JSON.stringify(packet));
 
-                console.log(topic + ": " + message.toString())
+                console.log(topic + ": " + message.toString());
             });
         }
     });
