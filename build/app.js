@@ -1,6 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var mqtt = require("mqtt");
+Date.prototype.yyyyMMddHHmmss = function () {
+    var date = this;
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var day = date.getDate();
+    var hh = date.getHours();
+    var mm = date.getMinutes();
+    var ss = date.getSeconds();
+    return "" + year +
+        (month < 10 ? "0" + month : month) +
+        (day < 10 ? "0" + day : day) +
+        (hh < 10 ? "0" + hh : hh) +
+        (mm < 10 ? "0" + mm : mm) +
+        (ss < 10 ? "0" + ss : ss);
+};
 var client = mqtt.connect("wss://mbltest01.mqtt.iot.gz.baidubce.com:8884/mqtt", {
     username: "mbltest01/body",
     password: "grSMaiLF8hiOtbPJFgXZdadTDBBKAY6I1KSNIKr+MgI="
@@ -20,7 +35,12 @@ client.on("connect", function (connack) {
                 console.log(JSON.stringify(packet));
                 console.log(topic + ": " + message.toString());
             });
-            client.publish("eight/i.am", "body", function (err) {
+            var message = {
+                who: "body",
+                whoAmI: "body",
+                when: new Date().yyyyMMddHHmmss()
+            };
+            client.publish("eight/i.am", JSON.stringify(message), function (err) {
                 console.log("publish");
                 console.log(JSON.stringify(err));
             });
