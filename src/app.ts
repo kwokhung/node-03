@@ -5,11 +5,24 @@ let client = mqtt.connect("wss://mbltest01.mqtt.iot.gz.baidubce.com:8884/mqtt", 
     password: "JWFcQYcFXxIbghm+8JEvqRfPf9fN7Ah3NeZupc6Zgqw="
 });
 
-client.on("connect", () => {
-    console.log("connected");
+client.on("connect", (connack) => {
+    console.log("on connect");
+    console.log(JSON.stringify(connack));
 
-    client.on("message", (topic: String, message: Buffer) => {
-        console.log(topic + ": " + message.toString())
+    client.subscribe("eight/#", (err, granted) => {
+        console.log("subscribe");
+        console.log(JSON.stringify(err));
+        console.log(JSON.stringify(granted));
+
+        if (typeof err === 'undefined' || err === null) {
+            client.on("message", (topic, message, packet) => {
+                console.log("on message");
+                console.log(JSON.stringify(topic));
+                console.log(JSON.stringify(message));
+                console.log(JSON.stringify(packet));
+
+                console.log(topic + ": " + message.toString())
+            });
+        }
     });
-    client.subscribe("eight/#");
 })
