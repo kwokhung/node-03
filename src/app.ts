@@ -1,23 +1,20 @@
 import * as mqtt from "mqtt";
 
 let client = mqtt.connect("wss://mbltest01.mqtt.iot.gz.baidubce.com:8884/mqtt", {
-    username: "mbltest01/eight",
-    password: "JWFcQYcFXxIbghm+8JEvqRfPf9fN7Ah3NeZupc6Zgqw="
+    username: "mbltest01/body",
+    password: "grSMaiLF8hiOtbPJFgXZdadTDBBKAY6I1KSNIKr+MgI="
 });
 
 client.on("connect", (connack) => {
     console.log("on connect");
-    let a: Buffer = Buffer.from("a的a");
-    console.log(JSON.stringify(a));
-    console.log(a.toString());
     console.log(JSON.stringify(connack));
 
-    client.subscribe("eight/#", (err, granted) => {
+    client.subscribe("body/#", (err, granted) => {
         console.log("subscribe");
         console.log(JSON.stringify(err));
         console.log(JSON.stringify(granted));
 
-        if ((typeof err === 'undefined' || err === null) && granted.some(value => value.topic === "eight/#" && value.qos !== 128)) {
+        if ((typeof err === 'undefined' || err === null) && granted.some(value => value.topic === "body/#" && value.qos !== 128)) {
             client.on("message", (topic, message, packet) => {
                 console.log("on message");
                 console.log(JSON.stringify(topic));
@@ -25,6 +22,11 @@ client.on("connect", (connack) => {
                 console.log(JSON.stringify(packet));
 
                 console.log(topic + ": " + message.toString());
+            });
+
+            client.publish("eight/i.am", "a的a", (err) => {
+                console.log("publish");
+                console.log(JSON.stringify(err));
             });
         }
     });

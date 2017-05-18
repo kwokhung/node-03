@@ -2,26 +2,27 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var mqtt = require("mqtt");
 var client = mqtt.connect("wss://mbltest01.mqtt.iot.gz.baidubce.com:8884/mqtt", {
-    username: "mbltest01/eight",
-    password: "JWFcQYcFXxIbghm+8JEvqRfPf9fN7Ah3NeZupc6Zgqw="
+    username: "mbltest01/body",
+    password: "grSMaiLF8hiOtbPJFgXZdadTDBBKAY6I1KSNIKr+MgI="
 });
 client.on("connect", function (connack) {
     console.log("on connect");
-    var a = Buffer.from("a的a");
-    console.log(JSON.stringify(a));
-    console.log(a.toString());
     console.log(JSON.stringify(connack));
-    client.subscribe("eight/#", function (err, granted) {
+    client.subscribe("body/#", function (err, granted) {
         console.log("subscribe");
         console.log(JSON.stringify(err));
         console.log(JSON.stringify(granted));
-        if ((typeof err === 'undefined' || err === null) && granted.some(function (value) { return value.topic === "eight/#" && value.qos !== 128; })) {
+        if ((typeof err === 'undefined' || err === null) && granted.some(function (value) { return value.topic === "body/#" && value.qos !== 128; })) {
             client.on("message", function (topic, message, packet) {
                 console.log("on message");
                 console.log(JSON.stringify(topic));
                 console.log(JSON.stringify(message));
                 console.log(JSON.stringify(packet));
                 console.log(topic + ": " + message.toString());
+            });
+            client.publish("eight/i.am", "a的a", function (err) {
+                console.log("publish");
+                console.log(JSON.stringify(err));
             });
         }
     });
