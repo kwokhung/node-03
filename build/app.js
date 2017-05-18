@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var mqtt = require("mqtt");
 Date.prototype.yyyyMMddHHmmss = function () {
     var date = this;
     var year = date.getFullYear();
@@ -16,6 +15,7 @@ Date.prototype.yyyyMMddHHmmss = function () {
         (mm < 10 ? "0" + mm : mm) +
         (ss < 10 ? "0" + ss : ss);
 };
+var mqtt = require("mqtt");
 var client = mqtt.connect("wss://mbltest01.mqtt.iot.gz.baidubce.com:8884/mqtt", {
     username: "mbltest01/body",
     password: "grSMaiLF8hiOtbPJFgXZdadTDBBKAY6I1KSNIKr+MgI="

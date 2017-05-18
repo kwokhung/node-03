@@ -1,5 +1,3 @@
-import * as mqtt from "mqtt";
-
 declare global {
     interface Date {
         yyyyMMddHHmmss(): string;
@@ -22,6 +20,8 @@ Date.prototype.yyyyMMddHHmmss = function () {
         (mm < 10 ? "0" + mm : mm) +
         (ss < 10 ? "0" + ss : ss);
 };
+
+import * as mqtt from "mqtt";
 
 let client = mqtt.connect("wss://mbltest01.mqtt.iot.gz.baidubce.com:8884/mqtt", {
     username: "mbltest01/body",
