@@ -24,7 +24,7 @@ client.on("connect", (connack) => {
                 console.log(topic + ": " + message.toString());
             });
 
-            client.publish("eight/i.am", "a的a", (err) => {
+            client.publish("eight/i.am", "body", (err) => {
                 console.log("publish");
                 console.log(JSON.stringify(err));
             });

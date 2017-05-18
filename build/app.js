@@ -20,7 +20,7 @@ client.on("connect", function (connack) {
                 console.log(JSON.stringify(packet));
                 console.log(topic + ": " + message.toString());
             });
-            client.publish("eight/i.am", "a的a", function (err) {
+            client.publish("eight/i.am", "body", function (err) {
                 console.log("publish");
                 console.log(JSON.stringify(err));
             });
