@@ -53,7 +53,7 @@ client.on("connect", (connack) => {
                 when: new Date().yyyyMMddHHmmss()
             };
 
-            client.publish("eight/i.am", JSON.stringify(data), (err) => {
+            client.publish("toEight/i.am", JSON.stringify(data), (err) => {
                 console.log("publish");
                 console.log(JSON.stringify(err));
             });
